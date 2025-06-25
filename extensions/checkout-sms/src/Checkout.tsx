@@ -8,6 +8,7 @@ import {
   useInstructions,
   useTranslate,
   useAttributes,
+  useExtensionApi,
 } from "@shopify/ui-extensions-react/checkout";
 import { useState } from "react";
 import { parsePhoneNumber } from "libphonenumber-js";
@@ -32,6 +33,9 @@ function Extension() {
   //     value: "testValue",
   //   });
   // }, []);
+  const { extension } = useExtensionApi();
+  console.log("Extension target:", extension.target);
+
   console.log("Cart attributes:", attributes);
   // 2. Check instructions for feature availability, see https://shopify/ui-extensions-react/checkout for details
   if (!instructions.attributes.canUpdateAttributes) {
@@ -48,7 +52,16 @@ function Extension() {
   const testKeyAttribute = attributes?.find(
     (attr) => attr.key === "_sms_checkout_test",
   );
-  if (!testKeyAttribute || testKeyAttribute.value !== "_sms_checkout_test") {
+
+  // Render BlockStack when:
+  // 1. testKeyAttribute.value === "_sms_checkout_test" AND extension.target === "purchase.checkout.block.render"
+  // 2. OR when extension.target !== "purchase.checkout.block.render"
+  const shouldRenderBlockStack =
+    (testKeyAttribute?.value === "_sms_checkout_test" &&
+      extension.target === "purchase.checkout.block.render") ||
+    extension.target !== "purchase.checkout.block.render";
+
+  if (!shouldRenderBlockStack) {
     return null;
   }
 
