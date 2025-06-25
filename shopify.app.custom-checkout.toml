@@ -1,0 +1,27 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "847201d0c08ed47016699d2f26ba7e5e"
+name = "custom-checkout"
+handle = "custom-checkout-98"
+application_url = "https://rail-electronic-eligibility-networking.trycloudflare.com"
+embedded = true
+
+[webhooks]
+api_version = "2025-04"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products"
+
+[auth]
+redirect_urls = [
+  "https://rail-electronic-eligibility-networking.trycloudflare.com/auth/callback",
+  "https://rail-electronic-eligibility-networking.trycloudflare.com/auth/shopify/callback",
+  "https://rail-electronic-eligibility-networking.trycloudflare.com/api/auth/callback"
+]
+
+[pos]
+embedded = false
+
+[build]
+automatically_update_urls_on_dev = true

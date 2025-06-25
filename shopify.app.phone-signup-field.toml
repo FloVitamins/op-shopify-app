@@ -1,0 +1,28 @@
+# Learn more about configuring your app at https://shopify.dev/docs/apps/tools/cli/configuration
+
+client_id = "5327190a252150ae146deec41692f0d7"
+name = "custom-checkout"
+handle = "custom-checkout-250"
+application_url = "https://convinced-flashers-attachments-horror.trycloudflare.com"
+embedded = true
+
+[build]
+include_config_on_deploy = true
+automatically_update_urls_on_dev = true
+
+[webhooks]
+api_version = "2025-04"
+
+[access_scopes]
+# Learn more at https://shopify.dev/docs/apps/tools/cli/configuration#access_scopes
+scopes = "write_products"
+
+[auth]
+redirect_urls = [
+  "https://convinced-flashers-attachments-horror.trycloudflare.com/auth/callback",
+  "https://convinced-flashers-attachments-horror.trycloudflare.com/auth/shopify/callback",
+  "https://convinced-flashers-attachments-horror.trycloudflare.com/api/auth/callback"
+]
+
+[pos]
+embedded = false
