@@ -1,14 +1,11 @@
 import {
   reactExtension,
-  Banner,
   BlockStack,
   TextField,
   Checkbox,
   useApplyAttributeChange,
-  useInstructions,
   useTranslate,
-  useAttributes,
-  useExtensionApi,
+  useApi,
 } from "@shopify/ui-extensions-react/checkout";
 import { useState } from "react";
 import { parsePhoneNumber } from "libphonenumber-js";
@@ -20,46 +17,24 @@ export default reactExtension("purchase.checkout.block.render", () => (
 
 function Extension() {
   const translate = useTranslate();
-  const instructions = useInstructions();
   const applyAttributeChange = useApplyAttributeChange();
   const [phoneError, setPhoneError] = useState("");
   const [formattedPhone, setFormattedPhone] = useState("");
 
-  const attributes = useAttributes();
-  // useEffect(() => {
-  //   applyAttributeChange({
-  //     type: "updateAttribute",
-  //     key: "testKey",
-  //     value: "testValue",
-  //   });
-  // }, []);
-  const { extension } = useExtensionApi();
-  console.log("Extension target:", extension.target);
-
-  console.log("Cart attributes:", attributes);
-  // 2. Check instructions for feature availability, see https://shopify/ui-extensions-react/checkout for details
-  if (!instructions.attributes.canUpdateAttributes) {
-    // For checkouts such as draft order invoices, cart attributes may not be allowed
-    // Consider rendering a fallback UI or nothing at all, if the feature is unavailable
-    return (
-      <Banner title="checkout-ui" status="warning">
-        {translate("attributeChangesAreNotSupported")}
-      </Banner>
-    );
-  }
+  const api = useApi();
+  const attributes = api.attributes.current;
 
   // Check if testKey attribute has correct value
+  // const testKeyAttribute = attributes?.find(
+  //   (attr) => attr.key === "_sms_checkout_test",
+  // );
   const testKeyAttribute = attributes?.find(
-    (attr) => attr.key === "_sms_checkout_test",
+    (a) => a.key === "_sms_checkout_test",
   );
 
   // Render BlockStack when:
-  // 1. testKeyAttribute.value === "_sms_checkout_test" AND extension.target === "purchase.checkout.block.render"
-  // 2. OR when extension.target !== "purchase.checkout.block.render"
-  const shouldRenderBlockStack =
-    (testKeyAttribute?.value === "_sms_checkout_test" &&
-      extension.target === "purchase.checkout.block.render") ||
-    extension.target !== "purchase.checkout.block.render";
+  // testKeyAttribute.value === "_sms_checkout_test"
+  const shouldRenderBlockStack = testKeyAttribute?.value === "true";
 
   if (!shouldRenderBlockStack) {
     return null;
