@@ -106,21 +106,6 @@ This will:
 - Create a tunnel for local development
 - Open your app in the browser
 
-### Testing the Extension
-
-1. **Install the app** in your development store
-2. **Add a test attribute** to your cart with key `_sms_checkout_test` and value `true`
-3. **Go to checkout** - you should see the SMS collection form
-4. **Test phone validation** by entering various phone number formats
-
-### Extension Configuration
-
-The checkout extension is configured in `extensions/checkout-sms/shopify.extension.toml`:
-
-- **Target**: `purchase.checkout.block.render` - renders in the checkout block area
-- **API Access**: Enabled for cart attribute updates
-- **Module**: `./src/Checkout.tsx` - the main extension component
-
 ## 📁 Project Structure
 
 ```
