@@ -25,6 +25,9 @@ database.sqlite
 .shopify.lock
 .shopifyignore
 
+# Shopify app configuration (contains local tunnel URLs)
+shopify.app.toml
+
 # Logs
 logs
 *.log

@@ -82,6 +82,16 @@ npm install
 cd ../..
 ```
 
+### 3. Setup Shopify Configuration
+
+The `shopify.app.toml` file is gitignored because it contains local tunnel URLs. Copy the template:
+
+```bash
+cp shopify.app.toml.template shopify.app.toml
+```
+
+The Shopify CLI will automatically update the URLs when you run `npm run dev`.
+
 ## 🚀 Development
 
 ### Start the Development Server
@@ -141,21 +151,6 @@ Each extension in the `extensions/` folder is a self-contained module with:
 - **Translations** in `locales/` directory (if applicable)
 - **Build output** in `dist/` directory (gitignored)
 - **Type-specific files** depending on extension type (e.g., `functions/` for payment functions)
-
-## 🔧 Extension Features
-
-### Phone Number Collection
-- Validates phone numbers using libphonenumber-js
-- Formats numbers for display (national format)
-- Stores in E.164 format as cart attribute `customerPhoneNumber`
-
-### Marketing Consent
-- Collects consent via checkbox
-- Stores as cart attribute `marketingConsent` (yes/no)
-
-### Conditional Rendering
-- Only renders when cart attribute `_sms_checkout_test` equals `"true"`
-- Allows for easy testing and gradual rollout
 
 ## 🚀 Deployment
 
