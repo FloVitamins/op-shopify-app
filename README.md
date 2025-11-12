@@ -97,6 +97,7 @@ The Shopify CLI will automatically update the URLs when you run `npm run dev`.
 ### Start the Development Server
 
 ```bash
+# From the project root
 npm run dev
 ```
 
@@ -142,12 +143,14 @@ Each extension in the `extensions/` folder is a self-contained module with:
 ### Build for Production
 
 ```bash
+# From the project root
 npm run build
 ```
 
 ### Deploy to Shopify
 
 ```bash
+# From the project root
 npm run deploy
 ```
 
